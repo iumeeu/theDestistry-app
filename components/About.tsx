@@ -1,0 +1,118 @@
+import {
+  Box,
+  Container,
+  Grid,
+  Group,
+  Image,
+  Stack,
+  Text,
+  ThemeIcon,
+  Title,
+} from "@mantine/core";
+import { IconCoin, IconDental } from "@tabler/icons-react";
+
+export function About() {
+  return (
+    <Box id="about" className="section">
+      <Container size="xl">
+        <Grid gutter={0} align="stretch">
+          {/* Left: Text */}
+          <Grid.Col span={{ base: 12, md: 4 }}>
+            <Stack gap="sm" pr={{ md: 40 }}>
+              <Text fz="xl" fw={400} c="tan.6" style={{ letterSpacing: 2 }}>
+                About Us
+              </Text>
+              <Title
+                order={2}
+                fz={{ base: 20, md: 28 }}
+                fw={300}
+                c="#CBBCA8"
+                lh={1.25}
+              >
+                Best Dental Clinic That
+                <br />
+                You Can Trust
+              </Title>
+              <Text c="dimmed" fz="xs" lh={1.8} mt={4}>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
+              </Text>
+
+              <Stack gap="xl" mt="lg">
+                <Group wrap="nowrap" align="flex-start" gap="md">
+                  <ThemeIcon
+                    size={100}
+                    radius="md"
+                    color="tan"
+                    variant="filled"
+                    style={{ flexShrink: 0 }}
+                  >
+                    <IconDental size={80} stroke={1.2} />
+                  </ThemeIcon>
+                  <Stack gap={6}>
+                    <Title order={5} c="tan.6" fw={500} fz="md">
+                      Complete Dental Care
+                    </Title>
+                    <Text c="dimmed" fz="xs" lh={1.7}>
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
+                    </Text>
+                  </Stack>
+                </Group>
+
+                <Group wrap="nowrap" align="flex-start" gap="md">
+                  <ThemeIcon
+                    size={100}
+                    radius="md"
+                    color="tan"
+                    variant="filled"
+                    style={{ flexShrink: 0 }}
+                  >
+                    <IconCoin size={80} stroke={1.2} />
+                  </ThemeIcon>
+                  <Stack gap={6}>
+                    <Title order={5} c="tan.6" fw={500} fz="md">
+                      Affordable Pricing
+                    </Title>
+                    <Text c="dimmed" fz="xs" lh={1.7}>
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
+                    </Text>
+                  </Stack>
+                </Group>
+              </Stack>
+            </Stack>
+          </Grid.Col>
+
+          {/* Center: รูปใหญ่ */}
+          <Grid.Col span={{ base: 12, md: 4 }}>
+            <Image
+              radius="lg"
+              h={{ base: 320, md: 480 }}
+              src="/images/Tools/airflow1.png"
+              alt="patient"
+              fit="cover"
+            />
+          </Grid.Col>
+
+          {/* Right: รูปเล็ก */}
+          <Grid.Col span={{ base: 12, md: 4 }}>
+            <div
+              style={{
+                paddingLeft: 16,
+                height: "100%",
+                display: "flex",
+                alignItems: "center",
+              }}
+            >
+              <Image
+                radius="lg"
+                style={{ height: "400px", width: "100%", objectFit: "cover" }}
+                src="/images/Interior/Lobby/TheDentistry_Lobby_RightAngled_DLogoTV.png"
+                alt="clinic interior"
+                fit="cover"
+              />
+            </div>
+          </Grid.Col>
+        </Grid>
+      </Container>
+    </Box>
+  );
+}
