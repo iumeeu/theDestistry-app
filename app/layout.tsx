@@ -12,7 +12,7 @@ import { LanguageProvider } from "@/lib/i18n";
 import { Anuphan, Inter } from "next/font/google";
 
 export const metadata: Metadata = {
-  title: "The Dentistry — Excellent Techniques For Healthy Dental Condition",
+  title: "The Dentistry",
   description:
     "The Dentistry คลินิกทันตกรรมครบวงจร พร้อมเทคโนโลยี CBCT และ iTero ดูแลโดยแพทย์เฉพาะทางทุกสาขา",
 };
