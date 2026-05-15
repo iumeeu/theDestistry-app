@@ -16,20 +16,20 @@ import {
   IconArrowRight,
   IconDental,
   IconDentalBroken,
-  IconDroplet,
   IconScan,
   IconSparkles,
-  IconStethoscope,
+  IconWand,
+  IconBox,
 } from "@tabler/icons-react";
 import { useLanguage } from "@/lib/i18n";
 
 const icons = [
-  IconStethoscope,
   IconSparkles,
-  IconDental,
-  IconDentalBroken,
-  IconDroplet,
   IconScan,
+  IconDentalBroken,
+  IconWand,
+  IconDental,
+  IconBox,
 ];
 const altBg = "var(--mantine-color-beige-0)";
 const cardColors = [altBg, undefined, altBg, undefined, altBg, undefined];
