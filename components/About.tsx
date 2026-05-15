@@ -26,21 +26,21 @@ export function About() {
           {/* Left: Text */}
           <Grid.Col span={{ base: 12, md: 4 }}>
             <Stack gap="sm" pr={{ md: 40 }}>
-              <Text fz="xl" fw={400} c="#da9770" style={{ letterSpacing: 2 }}>
+              <Text fz="xl" fw={400} c="tan.6" style={{ letterSpacing: 2 }}>
                 {t.about.eyebrow}
               </Text>
               <Title
                 order={2}
                 fz={{ base: 20, md: 28 }}
                 fw={500}
-                c="#4c4543"
+                c="darkGrey.6"
                 lh={1.25}
               >
                 {t.about.heading[0]}
                 <br />
                 {t.about.heading[1]}
               </Title>
-              <Text c="#4c4543" fz="xs" lh={1.8} mt={4}>
+              <Text c="darkGrey.6" fz="xs" lh={1.8} mt={4}>
                 {t.about.desc}
               </Text>
 
@@ -57,21 +57,21 @@ export function About() {
                       <ThemeIcon
                         size={100}
                         radius="md"
-                        color="#da9770"
+                        color="tan"
                         variant="filled"
                         style={{ flexShrink: 0 }}
                       >
                         <Icon
                           size={72}
                           stroke={1.2}
-                          color="#ffffff"
+                          color="var(--mantine-color-white)"
                         />
                       </ThemeIcon>
                       <Stack gap={6}>
-                        <Title order={5} c="#4c4543" fw={600} fz="md">
+                        <Title order={5} c="darkGrey.6" fw={600} fz="md">
                           {card.title}
                         </Title>
-                        <Text c="#4c4543" fz="xs" lh={1.7}>
+                        <Text c="darkGrey.6" fz="xs" lh={1.7}>
                           {card.desc}
                         </Text>
                       </Stack>

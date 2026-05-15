@@ -64,8 +64,8 @@ export function FloatingContact() {
           radius="xl"
           aria-label="Phone"
           style={{
-            backgroundColor: "var(--mantine-color-beige-6)",
-            color: "var(--mantine-color-darkGrey-6)",
+            backgroundColor: "var(--mantine-color-tan-6)",
+            color: "#fff",
             boxShadow: "0 2px 8px rgba(0,0,0,0.2)",
           }}
         >

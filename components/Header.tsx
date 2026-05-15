@@ -32,7 +32,7 @@ export function Header() {
         position: "sticky",
         top: 0,
         zIndex: 50,
-        background: "var(--mantine-color-beige-2)",
+        background: "var(--mantine-color-beige-6)",
       }}
     >
       <Container size="xl" py="md">

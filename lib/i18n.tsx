@@ -108,7 +108,7 @@ const th = {
     companyDesc:
       "คลินิกทันตกรรมครบวงจร ดูแลโดยทันตแพทย์ผู้มีประสบการณ์ ด้วยเทคโนโลยีที่แม่นยำและใส่ใจทุกรายละเอียด",
     address:
-      "สำนักงานใหญ่ (HQ): 388 ถนนสุขุมวิท แขวงคลองตัน เขตคลองเตย กรุงเทพมหานคร 10110",
+      "สำนักงานใหญ่: 183 อาคารรีเจ้นท์ เฮ้าส์ ชั้นที่ 11 ถนนราชดําริห์ กรุงเทพมหานคร 10330",
     quickLinksTitle: "ลิงก์ด่วน",
     quickLinks: [
       "เกี่ยวกับเรา",
@@ -255,7 +255,7 @@ const en: Translations = {
     companyDesc:
       "A full-service dental clinic cared for by experienced dentists, with precise technology and attention to every detail.",
     address:
-      "Headquarters (HQ): 388 Sukhumvit Rd, Khlong Tan, Khlong Toei, Bangkok 10110",
+      "Headquarters: - ",
     quickLinksTitle: "Quick Links",
     quickLinks: [
       "About Us",

@@ -7,6 +7,7 @@ import {
   Container,
   Grid,
   Group,
+  List,
   Stack,
   Text,
 } from "@mantine/core";
@@ -26,20 +27,20 @@ export function Footer() {
   return (
     <Box
       component="footer"
-      style={{ background: "#ffffff" }}
+      style={{ background: "var(--mantine-color-white)" }}
     >
       <Container size="xl" py={48}>
         <Box
           p="xl"
           mb={48}
           style={{
-            background: "#e8e1d1",
+            background: "var(--mantine-color-beige-6)",
             borderRadius: 16,
-            color: "#4c4543",
+            color: "var(--mantine-color-darkGrey-6)",
           }}
         >
           <Group justify="space-between" wrap="wrap">
-            <Text fz="lg" fw={500}>
+            <Text fz="lg" fw={500} c="darkGrey.6">
               {t.footer.stayConnected}
             </Text>
             <Group gap="sm">
@@ -95,11 +96,23 @@ export function Footer() {
               <Text fw={600} c="darkGrey.6" fz="lg">
                 {t.footer.quickLinksTitle}
               </Text>
-              {t.footer.quickLinks.map((l) => (
-                <Anchor key={l} href="#" c="darkGrey.6" fz="sm">
-                  &gt; {l}
-                </Anchor>
-              ))}
+              <List
+                listStyleType="disc"
+                spacing={6}
+                c="darkGrey.6"
+                fz="sm"
+                styles={{
+                  itemWrapper: { display: "inline" },
+                }}
+              >
+                {t.footer.quickLinks.map((l) => (
+                  <List.Item key={l}>
+                    <Anchor href="#" c="darkGrey.6" fz="sm">
+                      {l}
+                    </Anchor>
+                  </List.Item>
+                ))}
+              </List>
             </Stack>
           </Grid.Col>
         </Grid>

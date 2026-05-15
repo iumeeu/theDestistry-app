@@ -24,12 +24,12 @@ export function Features() {
                 <Icon
                   size={36}
                   stroke={1.2}
-                  color="#da9770"
+                  color="var(--mantine-color-tan-6)"
                 />
               </ThemeIcon>
               <Title
                 order={3}
-                c="#da9770"
+                c="tan.6"
                 fw={500}
                 fz="h4"
                 ta="center"
@@ -37,7 +37,7 @@ export function Features() {
               >
                 {f.title}
               </Title>
-              <Text c="#4c4543" ta="center" maw={360}>
+              <Text c="darkGrey.6" ta="center" maw={360}>
                 {f.desc}
               </Text>
             </Stack>
