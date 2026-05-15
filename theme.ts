@@ -2,27 +2,44 @@
 
 import { createTheme, MantineColorsTuple } from "@mantine/core";
 
-const tan: MantineColorsTuple = [
-  "#fbf6ef",
-  "#f1e7d6",
-  "#e3ceae",
-  "#d4b483",
-  "#AC8F6F",
-  "#bf8f4d",
-  "#AC8F6F",
-  "#a17434",
-  "#90672c",
-  "#7c5821",
+// Brand theme color — Beige (#e8e1d1 = index 2)
+const beige: MantineColorsTuple = [
+  "#faf8f3",
+  "#f2ece0",
+  "#e8e1d1",
+  "#dccfb8",
+  "#d2c3a8",
+  "#cab896",
+  "#c2ad88",
+  "#a8916b",
+  "#8a7656",
+  "#6b5b41",
+];
+
+// Brand text color — Dark Grey (#4c4543 = index 6)
+const darkGrey: MantineColorsTuple = [
+  "#f5f4f4",
+  "#e6e4e4",
+  "#cbc8c7",
+  "#aea9a7",
+  "#959090",
+  "#847e7d",
+  "#4c4543",
+  "#423c3b",
+  "#393433",
+  "#2b2726",
 ];
 
 export const theme = createTheme({
-  primaryColor: "tan",
+  primaryColor: "beige",
   primaryShade: 6,
-  colors: { tan },
+  colors: { beige, darkGrey },
+  black: "#4c4543",
   fontFamily:
-    "'Anuphan', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+    "var(--font-inter), var(--font-anuphan), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
   headings: {
-    fontFamily: "'Anuphan', -apple-system, BlinkMacSystemFont, sans-serif",
+    fontFamily:
+      "var(--font-inter), var(--font-anuphan), -apple-system, BlinkMacSystemFont, sans-serif",
     fontWeight: "400",
   },
   defaultRadius: "md",

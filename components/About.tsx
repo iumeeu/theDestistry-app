@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Box,
   Container,
@@ -9,9 +11,14 @@ import {
   ThemeIcon,
   Title,
 } from "@mantine/core";
-import { IconCoin, IconDental } from "@tabler/icons-react";
+import { IconDevices, IconZoomCheck } from "@tabler/icons-react";
+import { useLanguage } from "@/lib/i18n";
+
+const cardIcons = [IconDevices, IconZoomCheck];
 
 export function About() {
+  const { t } = useLanguage();
+
   return (
     <Box id="about" className="section">
       <Container size="xl">
@@ -19,64 +26,58 @@ export function About() {
           {/* Left: Text */}
           <Grid.Col span={{ base: 12, md: 4 }}>
             <Stack gap="sm" pr={{ md: 40 }}>
-              <Text fz="xl" fw={400} c="tan.6" style={{ letterSpacing: 2 }}>
-                About Us
+              <Text fz="xl" fw={400} c="#da9770" style={{ letterSpacing: 2 }}>
+                {t.about.eyebrow}
               </Text>
               <Title
                 order={2}
                 fz={{ base: 20, md: 28 }}
-                fw={300}
-                c="#CBBCA8"
+                fw={500}
+                c="#4c4543"
                 lh={1.25}
               >
-                Best Dental Clinic That
+                {t.about.heading[0]}
                 <br />
-                You Can Trust
+                {t.about.heading[1]}
               </Title>
-              <Text c="dimmed" fz="xs" lh={1.8} mt={4}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
+              <Text c="#4c4543" fz="xs" lh={1.8} mt={4}>
+                {t.about.desc}
               </Text>
 
               <Stack gap="xl" mt="lg">
-                <Group wrap="nowrap" align="flex-start" gap="md">
-                  <ThemeIcon
-                    size={100}
-                    radius="md"
-                    color="tan"
-                    variant="filled"
-                    style={{ flexShrink: 0 }}
-                  >
-                    <IconDental size={80} stroke={1.2} />
-                  </ThemeIcon>
-                  <Stack gap={6}>
-                    <Title order={5} c="tan.6" fw={500} fz="md">
-                      Complete Dental Care
-                    </Title>
-                    <Text c="dimmed" fz="xs" lh={1.7}>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
-                    </Text>
-                  </Stack>
-                </Group>
-
-                <Group wrap="nowrap" align="flex-start" gap="md">
-                  <ThemeIcon
-                    size={100}
-                    radius="md"
-                    color="tan"
-                    variant="filled"
-                    style={{ flexShrink: 0 }}
-                  >
-                    <IconCoin size={80} stroke={1.2} />
-                  </ThemeIcon>
-                  <Stack gap={6}>
-                    <Title order={5} c="tan.6" fw={500} fz="md">
-                      Affordable Pricing
-                    </Title>
-                    <Text c="dimmed" fz="xs" lh={1.7}>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
-                    </Text>
-                  </Stack>
-                </Group>
+                {t.about.cards.map((card, i) => {
+                  const Icon = cardIcons[i];
+                  return (
+                    <Group
+                      key={card.title}
+                      wrap="nowrap"
+                      align="flex-start"
+                      gap="md"
+                    >
+                      <ThemeIcon
+                        size={100}
+                        radius="md"
+                        color="#da9770"
+                        variant="filled"
+                        style={{ flexShrink: 0 }}
+                      >
+                        <Icon
+                          size={72}
+                          stroke={1.2}
+                          color="#ffffff"
+                        />
+                      </ThemeIcon>
+                      <Stack gap={6}>
+                        <Title order={5} c="#4c4543" fw={600} fz="md">
+                          {card.title}
+                        </Title>
+                        <Text c="#4c4543" fz="xs" lh={1.7}>
+                          {card.desc}
+                        </Text>
+                      </Stack>
+                    </Group>
+                  );
+                })}
               </Stack>
             </Stack>
           </Grid.Col>

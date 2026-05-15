@@ -1,6 +1,6 @@
 import { Group, Text } from "@mantine/core";
 
-export function Logo({ color = "var(--mantine-color-tan-6)" }: { color?: string }) {
+export function Logo({ color = "var(--mantine-color-darkGrey-6)" }: { color?: string }) {
   return (
     <Group gap={10} align="center" wrap="nowrap">
       {/* <svg width="34" height="40" viewBox="0 0 34 40" fill="none" aria-hidden>

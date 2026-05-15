@@ -8,17 +8,26 @@ import type { Metadata } from "next";
 import { ColorSchemeScript, MantineProvider } from "@mantine/core";
 import { Notifications } from "@mantine/notifications";
 import { theme } from "@/theme";
-import { Anuphan } from "next/font/google";
+import { LanguageProvider } from "@/lib/i18n";
+import { Anuphan, Inter } from "next/font/google";
+
 export const metadata: Metadata = {
   title: "The Dentistry — Excellent Techniques For Healthy Dental Condition",
   description:
     "The Dentistry คลินิกทันตกรรมครบวงจร พร้อมเทคโนโลยี CBCT และ iTero ดูแลโดยแพทย์เฉพาะทางทุกสาขา",
 };
 
+// Thai text = Anuphan
 const anuphan = Anuphan({
   weight: ["300", "400", "500", "600", "700"],
   variable: "--font-anuphan",
-  subsets: ["thai"],
+  subsets: ["thai", "latin"],
+});
+
+// EN text = Inter
+const inter = Inter({
+  variable: "--font-inter",
+  subsets: ["latin"],
 });
 
 export default function RootLayout({
@@ -27,24 +36,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="th">
+    <html lang="th" className={`${inter.variable} ${anuphan.variable}`}>
       <head>
         <ColorSchemeScript defaultColorScheme="light" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin=""
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&family=Noto+Sans+Thai:wght@300;400;500;600;700&display=swap"
-          rel="stylesheet"
-        />
       </head>
-      <body className={`${anuphan.className} ${anuphan.variable}`}>
+      <body>
         <MantineProvider theme={theme} defaultColorScheme="light">
           <Notifications position="top-right" />
-          {children}
+          <LanguageProvider>{children}</LanguageProvider>
         </MantineProvider>
       </body>
     </html>

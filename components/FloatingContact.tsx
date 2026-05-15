@@ -6,8 +6,10 @@ import {
   IconBrandMessenger,
   IconPhone,
 } from "@tabler/icons-react";
+import { useLanguage } from "@/lib/i18n";
 
 export function FloatingContact() {
+  const { t } = useLanguage();
   return (
     <Stack
       gap="xs"
@@ -18,7 +20,7 @@ export function FloatingContact() {
         zIndex: 100,
       }}
     >
-      <Tooltip label="LINE" position="left" withArrow>
+      <Tooltip label={t.floating.line} position="left" withArrow>
         <ActionIcon
           component="a"
           href="https://line.me/R/ti/p/@thedentistry"
@@ -36,7 +38,7 @@ export function FloatingContact() {
         </ActionIcon>
       </Tooltip>
 
-      <Tooltip label="Messenger" position="left" withArrow>
+      <Tooltip label={t.floating.messenger} position="left" withArrow>
         <ActionIcon
           component="a"
           href="https://m.me/thedentistry"
@@ -54,7 +56,7 @@ export function FloatingContact() {
         </ActionIcon>
       </Tooltip>
 
-      <Tooltip label="โทรหาเรา" position="left" withArrow>
+      <Tooltip label={t.floating.call} position="left" withArrow>
         <ActionIcon
           component="a"
           href="tel:0899999999"
@@ -62,8 +64,8 @@ export function FloatingContact() {
           radius="xl"
           aria-label="Phone"
           style={{
-            backgroundColor: "var(--mantine-color-tan-6)",
-            color: "#fff",
+            backgroundColor: "var(--mantine-color-beige-6)",
+            color: "var(--mantine-color-darkGrey-6)",
             boxShadow: "0 2px 8px rgba(0,0,0,0.2)",
           }}
         >

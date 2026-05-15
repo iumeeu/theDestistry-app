@@ -3,7 +3,6 @@
 import {
   Box,
   Burger,
-  Button,
   Container,
   Drawer,
   Group,
@@ -12,19 +11,20 @@ import {
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { Logo } from "./Logo";
-
-const links = [
-  { label: "หน้าแรก", href: "#home" },
-  // { label: "เกี่ยวกับเรา", href: "#about" },
-  // { label: "ทันตแพทย์", href: "#doctors" },
-  { label: "บริการและราคา", href: "#services" },
-  { label: "โปรโมชั่น", href: "#promotions" },
-  { label: "ค้นหาสาขา", href: "#branches" },
-  // { label: "บทความ", href: "#blog" },
-];
+import { LangToggle } from "./LangToggle";
+import { useLanguage } from "@/lib/i18n";
 
 export function Header() {
   const [opened, { toggle, close }] = useDisclosure(false);
+  const { t } = useLanguage();
+
+  const links = [
+    { label: t.nav.home, href: "#home" },
+    { label: t.nav.services, href: "#services" },
+    { label: t.nav.promotions, href: "#promotions" },
+    { label: t.nav.branches, href: "#branches" },
+  ];
+
   return (
     <Box
       component="header"
@@ -32,43 +32,35 @@ export function Header() {
         position: "sticky",
         top: 0,
         zIndex: 50,
-        background: "var(--mantine-color-tan-6)",
+        background: "var(--mantine-color-beige-2)",
       }}
     >
       <Container size="xl" py="md">
         <Group justify="space-between" wrap="nowrap">
-          <Logo color="#fff" />
+          <Logo color="var(--mantine-color-darkGrey-6)" />
           <Group gap="lg" visibleFrom="md" wrap="nowrap">
             {links.map((l) => (
               <UnstyledButton
                 key={l.href}
                 component="a"
                 href={l.href}
-                c="white"
+                c="darkGrey.6"
                 fz="sm"
-                style={{ opacity: 0.95 }}
               >
                 {l.label}
               </UnstyledButton>
             ))}
-            <Button
-              component="a"
-              href="#appointment"
-              variant="white"
-              color="tan"
-              radius="xl"
-              size="sm"
-            >
-              Appointment
-            </Button>
+            <LangToggle />
           </Group>
-          <Burger
-            opened={opened}
-            onClick={toggle}
-            hiddenFrom="md"
-            color="white"
-            aria-label="menu"
-          />
+          <Group gap="sm" hiddenFrom="md" wrap="nowrap">
+            <LangToggle />
+            <Burger
+              opened={opened}
+              onClick={toggle}
+              color="var(--mantine-color-darkGrey-6)"
+              aria-label="menu"
+            />
+          </Group>
         </Group>
       </Container>
       <Drawer
@@ -91,15 +83,6 @@ export function Header() {
               {l.label}
             </UnstyledButton>
           ))}
-          <Button
-            component="a"
-            href="#appointment"
-            onClick={close}
-            radius="xl"
-            color="tan"
-          >
-            Appointment
-          </Button>
         </Stack>
       </Drawer>
     </Box>
