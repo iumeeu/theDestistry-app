@@ -170,7 +170,7 @@ export function About() {
                 <Image
                   h={{ base: 240, sm: "100%", md: "100%" }}
                   mih={{ sm: 400, md: 480 }}
-                  src="/images/interior/OPD/TheDentistry_OPD_Wide_GreeneryView.png"
+                  src="/images/Interior/OPD/TheDentistry_OPD_Wide_GreeneryView.png"
                   alt="patient"
                   fit="cover"
                   style={{ display: "block", width: "100%" }}
