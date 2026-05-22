@@ -34,6 +34,25 @@ export type ServiceListResult = {
     totalPages: number;
 };
 
+export type TeamMember = {
+    id: string;
+    nameTh: string;
+    nameEn: string;
+    nicknameTh: string;
+    nicknameEn: string;
+    roleTh: string;
+    roleEn: string;
+    educationTh: string[];
+    educationEn: string[];
+    specialityTh: string[];
+    specialityEn: string[];
+    trainingTh: string;
+    trainingEn: string;
+    branches: string[];
+    phone: string;
+    image: string | null;
+};
+
 export async function getLatestPosts() {
     const post = await fetchSanity<LatestPost[]>(groq`*[_type == "blog.post" && defined(metadata.slug.current)] | order(coalesce(publishDate, _createdAt) desc) {
   "title": coalesce(metadata.title, "Untitled"),
@@ -272,4 +291,27 @@ export async function getServicePosts({
         pageSize: normalizedPageSize,
         totalPages,
     };
+}
+
+export async function getTeams() {
+    const teams = await fetchSanity<TeamMember[]>(groq`*[_type == "teams"] | order(order asc, coalesce(publishDate, _createdAt) desc) {
+        "id": _id,
+        "nameTh": coalesce(title, metadata.title, "Untitled"),
+        "nameEn": coalesce(titleEn, title, metadata.title, "Untitled"),
+        "nicknameTh": coalesce(nickname, ""),
+        "nicknameEn": coalesce(nicknameEn, nickname, ""),
+        "roleTh": coalesce(role, ""),
+        "roleEn": coalesce(roleEn, role, ""),
+        "educationTh": coalesce(education, []),
+        "educationEn": coalesce(educationEn, education, []),
+        "specialityTh": coalesce(speciality, []),
+        "specialityEn": coalesce(specialityEn, speciality, []),
+        "trainingTh": coalesce(training, ""),
+        "trainingEn": coalesce(trainingEn, training, ""),
+        "branches": coalesce(branch, []),
+        "phone": coalesce(phone, ""),
+        "image": metadata.image.asset->url
+    }`);
+
+    return teams;
 }

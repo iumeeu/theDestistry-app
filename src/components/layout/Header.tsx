@@ -20,10 +20,10 @@ export function Header() {
 
   const links = [
     { label: t.nav.home, href: "/#home" },
-    { label: t.nav.services, href: "/#services" },
+    { label: t.nav.services, href: "/service" },
     { label: t.nav.promotions, href: "/#promotions" },
     { label: t.nav.branches, href: "/#branches" },
-    { label: t.nav.teams, href: "/#teams" },
+    { label: t.nav.teams, href: "/teams" },
     { label: t.nav.blog, href: "/blog" },
   ];
 

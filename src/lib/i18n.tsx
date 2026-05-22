@@ -112,6 +112,18 @@ Treatment Planning และ AI Smile Simulation เพื่อช่วย
     ],
     readMore: "อ่านเพิ่มเติม",
   },
+  teamsPage: {
+    eyebrow: "ทีมทันตแพทย์",
+    title: "ทีมคุณหมอของเรา",
+    subtitle:
+      "พบกับทีมทันตแพทย์ผู้มีประสบการณ์ พร้อมดูแลและออกแบบการรักษาที่เหมาะกับแต่ละบุคคล",
+    branchLabel: "สาขาที่ให้บริการ",
+    educationLabel: "การศึกษา",
+    specialityLabel: "ความเชี่ยวชาญ",
+    trainingLabel: "การอบรม",
+    phoneLabel: "โทร",
+    empty: "ยังไม่มีข้อมูลทีมทันตแพทย์",
+  },
   footer: {
     stayConnected: "ติดตามข่าวสารกับ The Dentistry",
     companyDesc:
@@ -261,6 +273,18 @@ const en: Translations = {
       },
     ],
     readMore: "Read More",
+  },
+  teamsPage: {
+    eyebrow: "Dental Team",
+    title: "Meet Our Doctors",
+    subtitle:
+      "Get to know our experienced dentists who design each treatment plan around your needs.",
+    branchLabel: "Available Branches",
+    educationLabel: "Education",
+    specialityLabel: "Speciality",
+    trainingLabel: "Training",
+    phoneLabel: "Phone",
+    empty: "No dental team members found.",
   },
   footer: {
     stayConnected: "Stay Connected with The Dentistry",

@@ -21,7 +21,20 @@ import {
 } from "@tabler/icons-react";
 import { Logo } from "../Logo";
 import { useLanguage } from "@/lib/i18n";
-
+const socialIcons = [
+  {
+    Icon: IconBrandLine,
+    label: "Line",
+    href: "https://line.me/R/ti/p/@thedentistry",
+  },
+  { Icon: IconBrandFacebook, label: "Facebook", href: "https://www.facebook.com/Thedentistrygroup" },
+  // {
+  //   Icon: IconBrandTwitter,
+  //   label: "Twitter",
+  //   href: "#",
+  // },
+  { Icon: IconBrandInstagram, label: "Instagram", href: "https://www.instagram.com/thedentistrygroup" },
+];
 export function Footer() {
   const { t } = useLanguage();
 

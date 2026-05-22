@@ -71,10 +71,10 @@ export function ServiceListClient({
           <Stack gap="lg" mb="xl">
             <Text className="eyebrow">Our Services</Text>
             <Title order={1} c="tan.7">
-              All Service Articles
+              All Service
             </Title>
             <Text c="dimmed" maw={760}>
-              รวมบทความบริการทั้งหมดจาก The Dentistry
+              รวมบริการทั้งหมดจาก The Dentistry
             </Text>
           </Stack>
 
@@ -105,7 +105,7 @@ export function ServiceListClient({
 
           <SimpleGrid cols={{ base: 1, md: 2, lg: 3 }} spacing="xl">
             {items.map((post) => (
-              <Card key={post.slug} padding="md" radius="md" withBorder>
+              <Card key={post.slug}>
                 <Stack gap="sm">
                   <Image
                     src={post.img || fallbackImage}
