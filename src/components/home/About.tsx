@@ -160,7 +160,7 @@ export function About() {
                 <Image
                   h={{ base: 240, sm: "100%", md: "100%" }}
                   mih={{ sm: 400, md: 480 }}
-                  src="/images/interior/Photo Room/TheDentistry_PhotoRoom_MirrorWalls_Studio.png"
+                  src="/images/interior/Photo_Room/TheDentistry_PhotoRoom_MirrorWalls_Studio.png"
                   alt="patient"
                   fit="cover"
                   style={{ display: "block", width: "100%" }}
