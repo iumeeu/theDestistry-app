@@ -58,20 +58,18 @@ export function Footer() {
               {t.footer.stayConnected}
             </Text>
             <Group gap="sm">
-              {[
-                IconBrandLine,
-                IconBrandFacebook,
-                // IconBrandTwitter,
-                IconBrandInstagram,
-                // IconBrandYoutube,
-              ].map((Icon, i) => (
+              {socialIcons.map(({ Icon, label, href }, i) => (
                 <ActionIcon
                   key={i}
                   size="lg"
                   radius="xl"
                   variant="white"
                   color="darkGrey"
-                  aria-label="social"
+                  aria-label={label}
+                  component="a"
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   <Icon size={18} />
                 </ActionIcon>
