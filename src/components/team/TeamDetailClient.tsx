@@ -42,7 +42,6 @@ function SectionLabel({ label }: { label: string }) {
         fz={11}
         fw={600}
         tt="uppercase"
-        ls={2}
         c="tan.6"
         style={{ fontFamily: "var(--mantine-font-family)" }}
       >
