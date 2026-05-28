@@ -123,7 +123,7 @@ export default async function BlogDetailPage({ params }: BlogPageProps) {
                   alt={post.title}
                   radius="lg"
                   fit="cover"
-                  h={{ base: 220, md: 380 }}
+                  // h={{ base: 220, md: 380 }}
                 />
               ) : null}
             </Stack>
