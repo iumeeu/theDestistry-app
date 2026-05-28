@@ -25,29 +25,18 @@ export default defineType({
     }),
     defineField({
       name: "title",
-      type: "string",
-      title: "Name (Thai)",
-      group: "content",
-    }),
-    defineField({
-      name: "titleEn",
-      type: "string",
-      title: "Name (English)",
+      type: "localeString",
+      title: "Name",
       group: "content",
     }),
 
     defineField({
       name: "nickname",
-      type: "string",
-      title: "Nickname (Thai)",
+      type: "localeString",
+      title: "Nickname",
       group: "content",
     }),
-    defineField({
-      name: "nicknameEn",
-      type: "string",
-      title: "Nickname (English)",
-      group: "content",
-    }),
+
     defineField({
       name: "branch",
       title: "Branch",
@@ -57,84 +46,60 @@ export default defineType({
       options: {
         layout: "list",
         list: [
-          { title: "สาขา รามอินทรา กม.14", value: "สาขา รามอินทรา กม.14" },
-          {
-            title: "สาขา สาขารัชดา-ลาดพร้าว",
-            value: "สาขา สาขารัชดา-ลาดพร้าว",
-          },
+          { title: "สาขา รังสิต", value: "สาขา รังสิต" },
+
         ],
       },
     }),
     defineField({
       name: "role",
-      type: "string",
-      title: "Role (Thai)",
+      type: "localeString",
+      title: "Role",
       group: "content",
     }),
+
+    
     defineField({
-      name: "roleEn",
-      type: "string",
-      title: "Role (English)",
+      name: "description",
+      type: "localeText",
+      title: "Description",
       group: "content",
     }),
+
+
 
     defineField({
       name: "education",
       type: "array",
-      title: "Education (Thai)",
+      title: "Education",
       of: [
         {
-          type: "string",
+          type: "localeString",
         },
       ],
       group: "content",
     }),
-    defineField({
-      name: "educationEn",
-      type: "array",
-      title: "Education (English)",
-      of: [
-        {
-          type: "string",
-        },
-      ],
-      group: "content",
-    }),
+
     defineField({
       name: "speciality",
       type: "array",
-      title: "Speciality (Thai)",
+      title: "Speciality",
       of: [
         {
-          type: "string",
+          type: "localeString",
         },
       ],
       group: "content",
     }),
-    defineField({
-      name: "specialityEn",
-      type: "array",
-      title: "Speciality (English)",
-      of: [
-        {
-          type: "string",
-        },
-      ],
-      group: "content",
-    }),
+
     defineField({
       name: "training",
-      type: "text",
-      title: "Training (Thai)",
+      type: "localeText",
+      title: "Training",
       group: "content",
     }),
-    defineField({
-      name: "trainingEn",
-      type: "text",
-      title: "Training (English)",
-      group: "content",
-    }),
-    
+
+
     defineField({
       name: "phone",
       type: "string",
@@ -142,16 +107,11 @@ export default defineType({
     }),
     defineField({
       name: "body",
-      type: "body",
-      title: "Body (Thai)",
+      type: "localizedBlockContent",
+      title: "Body",
       group: "content",
     }),
-    defineField({
-      name: "bodyEn",
-      title: "Body (English)",
-      type: "body",
-      group: "content",
-    }),
+
 
     defineField({
       name: "publishDate",
@@ -169,7 +129,7 @@ export default defineType({
 
     defineField({
       name: "metadata",
-      type: "metadata",
+      type: "localizedMetadata",
       group: "seo",
     }),
   ],
@@ -183,7 +143,7 @@ export default defineType({
       order: "order",
     },
     prepare: ({ title, publishDate, slug, media, featured, order }) => ({
-      title: [featured && "★", title].filter(Boolean).join(" "),
+      title: [featured && "★", title?.th || title?.en].filter(Boolean).join(" "),
       subtitle: [
         `ลำดับ ${order ?? "-"}`,
         publishDate || "No date",
@@ -208,7 +168,20 @@ export default defineType({
     {
       title: "Title",
       name: "metadata.title",
-      by: [{ field: "title", direction: "asc" }],
+      by: [{ field: "metadata.title", direction: "asc" }],
     },
   ],
+  initialValue: async (getUrl, { getClient }) => {
+    // ใช้ client version ล่าสุดดึงข้อมูล
+    const client = getClient({ apiVersion: '2023-01-01' })
+
+    const query = `count(*[_type == "teams" && !(_id in path("drafts.**"))])`
+    const totalCount = await client.fetch(query)
+
+    return {
+      // ตัวเลขลำดับใหม่ = จำนวนปัจจุบัน + 1 (เช่น มีอยู่ 4 อัน อันใหม่จะได้เลข 5)
+      order: totalCount + 1,
+      publishDate: new Date().toISOString(),
+    }
+  },
 });

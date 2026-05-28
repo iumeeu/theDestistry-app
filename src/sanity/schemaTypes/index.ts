@@ -16,6 +16,10 @@ import tag from '@/sanity/schemaTypes/documents/tag'
 import serviceCategory from '@/sanity/schemaTypes/documents/service.category'
 import servicePost from '@/sanity/schemaTypes/documents/service.post'
 import customTable from '@/sanity/schemaTypes/objects/customTable'
+import { localeString } from '@/sanity/schemaTypes/objects/localeStringType'
+import { localeText } from '@/sanity/schemaTypes/objects/localeTextType'
+import localizedBlockContent from '@/sanity/schemaTypes/objects/localizedBlockContent'
+import { localizedMetadataType } from '@/sanity/schemaTypes/objects/localizedMetadata'
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
     horizontalContent,
@@ -26,12 +30,17 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     gallery,
     customTable,
     blockContentType,
+    localeString,
+    localeText,
+    localizedBlockContent,
+    localizedMetadataType,
     blogPost,
     person,
     blogCategory,
     teams,
     tag,
     serviceCategory,
-    servicePost
+    servicePost,
+
   ],
 }

@@ -4,6 +4,11 @@ import { createContext, useContext, useEffect, useMemo, useState } from "react";
 
 export type Lang = "th" | "en";
 
+export const supportedLanguages = [
+    { id: 'th', title: 'Thai', isDefault: true },
+    { id: 'en', title: 'English', },
+]
+
 const LOREM =
   "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam";
 
@@ -13,7 +18,7 @@ const th = {
     services: "บริการและราคา",
     promotions: "โปรโมชั่น",
     branches: "ค้นหาสาขา",
-    teams: "ทีมทันตแพทย์",
+    teams: "ทีมแพทย์ของเรา",
     blog: "บทความ",
   },
   // hero: {

@@ -15,10 +15,10 @@ import {
 } from "@mantine/core";
 import { IconPhoneCall, IconStethoscope } from "@tabler/icons-react";
 import { useLanguage } from "@/lib/i18n";
-import type { TeamMember } from "@/sanity/lib/queries";
+import Link from "next/link";
 
 type TeamListClientProps = {
-  items: TeamMember[];
+  items: Sanity.Team[];
 };
 
 const fallbackImage =
@@ -54,7 +54,10 @@ export function TeamListClient({ items }: TeamListClientProps) {
         </Container>
       </Box>
 
-      <Box className="section" style={{ background: "var(--mantine-color-beige-0)" }}>
+      <Box
+        className="section"
+        style={{ background: "var(--mantine-color-beige-0)" }}
+      >
         <Container size="xl">
           {items.length === 0 ? (
             <Text c="dimmed" ta="center">
@@ -64,51 +67,64 @@ export function TeamListClient({ items }: TeamListClientProps) {
 
           <SimpleGrid cols={{ base: 1, sm: 2, lg: 3 }} spacing="xl">
             {items.map((member) => {
-              const name = lang === "en" ? member.nameEn : member.nameTh;
-              const nickname = lang === "en" ? member.nicknameEn : member.nicknameTh;
-              const role = lang === "en" ? member.roleEn : member.roleTh;
-              const education = lang === "en" ? member.educationEn : member.educationTh;
-              const speciality = lang === "en" ? member.specialityEn : member.specialityTh;
-              const training = lang === "en" ? member.trainingEn : member.trainingTh;
+              const name = lang === "en" ? member.title?.en : member.title?.th;
+              const description =
+                lang === "en" ? member.description?.en : member.description?.th;
+              const role = lang === "en" ? member.role?.en : member.role?.th;
+              const training =
+                lang === "en" ? member.training?.en : member.training?.th;
 
               return (
-                <Card key={member.id} padding="lg" radius="lg" withBorder bg="white">
+                <Card key={member._id} padding={"lg"} bg={"transparent"}>
                   <Stack gap="md">
                     <Image
                       src={member.image || fallbackImage}
                       alt={name}
                       radius="md"
-                      h={280}
+                      h={400}
                       fit="cover"
                     />
 
                     <Stack gap={4}>
-                      <Title order={3} c="tan.7" fz="xl">
-                        {name}
-                      </Title>
-                      {nickname ? (
-                        <Text c="dimmed" fz="sm">
-                          {lang === "en" ? `Nickname: ${nickname}` : `ชื่อเล่น: ${nickname}`}
-                        </Text>
-                      ) : null}
+                      <Link href={`/teams/${member.metadata?.slug?.current}`}>
+                        <Title order={3} c="beige.7" fz="xl">
+                          {name}
+                        </Title>
+                      </Link>
                       {role ? (
                         <Group gap={6}>
-                          <ThemeIcon variant="light" color="tan" size="sm" radius="xl">
+                          <ThemeIcon
+                            variant="light"
+                            color="tan"
+                            size="sm"
+                            radius="xl"
+                          >
                             <IconStethoscope size={14} />
                           </ThemeIcon>
-                          <Text fw={500}>{role}</Text>
+                          <Text fw={500} c={"tan.7"}>
+                            {role}
+                          </Text>
                         </Group>
+                      ) : null}
+                      {description ? (
+                        <Text c="dimmed" fz="sm" fw={300}>
+                          {description}
+                        </Text>
                       ) : null}
                     </Stack>
 
-                    {member.branches.length ? (
+                    {member.branch?.length ? (
                       <Stack gap={8}>
                         <Text fw={600} fz="sm">
                           {t.teamsPage.branchLabel}
                         </Text>
                         <Group gap={8}>
-                          {member.branches.map((branch) => (
-                            <Badge key={`${member.id}-${branch}`} color="beige" variant="light">
+                          {member.branch.map((branch, idx) => (
+                            <Badge
+                              key={`${member._id}-${branch}-${idx}`}
+                              color="beige"
+                              variant="light"
+                            >
                               {branch}
                             </Badge>
                           ))}
@@ -116,27 +132,35 @@ export function TeamListClient({ items }: TeamListClientProps) {
                       </Stack>
                     ) : null}
 
-                    {education.length ? (
+                    {member.education?.length ? (
                       <Stack gap={4}>
                         <Text fw={600} fz="sm">
                           {t.teamsPage.educationLabel}
                         </Text>
-                        {education.map((item) => (
-                          <Text key={`${member.id}-edu-${item}`} fz="sm" c="darkGrey.6">
-                            • {item}
+                        {member.education.map((item, idx) => (
+                          <Text
+                            key={`${member._id}-edu-${idx}`}
+                            fz="sm"
+                            c="darkGrey.6"
+                          >
+                            • {lang === "en" ? item.en : item.th}
                           </Text>
                         ))}
                       </Stack>
                     ) : null}
 
-                    {speciality.length ? (
+                    {member.speciality?.length ? (
                       <Stack gap={4}>
                         <Text fw={600} fz="sm">
                           {t.teamsPage.specialityLabel}
                         </Text>
-                        {speciality.map((item) => (
-                          <Text key={`${member.id}-spec-${item}`} fz="sm" c="darkGrey.6">
-                            • {item}
+                        {member.speciality.map((item, idx) => (
+                          <Text
+                            key={`${member._id}-spec-${idx}`}
+                            fz="sm"
+                            c="darkGrey.6"
+                          >
+                            • {lang === "en" ? item.en : item.th}
                           </Text>
                         ))}
                       </Stack>

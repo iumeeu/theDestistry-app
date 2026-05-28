@@ -7,6 +7,7 @@ import {
   IconPhone,
 } from "@tabler/icons-react";
 import { useLanguage } from "@/lib/i18n";
+import { FaLine } from "react-icons/fa6";
 
 export function FloatingContact() {
   const { t } = useLanguage();
@@ -34,7 +35,7 @@ export function FloatingContact() {
             boxShadow: "0 2px 8px rgba(0,0,0,0.2)",
           }}
         >
-          <IconBrandLine size={24} />
+          <FaLine size={24} />
         </ActionIcon>
       </Tooltip>
 

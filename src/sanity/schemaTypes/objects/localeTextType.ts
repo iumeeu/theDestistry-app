@@ -4,12 +4,13 @@ import { defineType, defineField } from 'sanity'
 // Since schemas are code, we can programmatically build
 // fields to hold translated values. We'll use this array
 // of languages to determine which fields to define.
- 
+
+
 export const baseLanguage = supportedLanguages.find(l => l.isDefault)
 
-export const localeString = defineType({
-    title: 'Localized string',
-    name: 'localeString',
+export const localeText = defineType({
+    title: 'Localized text',
+    name: 'localeText',
     type: 'object',
     // Fieldsets can be used to group object fields.
     // Here we omit a fieldset for the "default language",
@@ -25,7 +26,7 @@ export const localeString = defineType({
     fields: supportedLanguages.map(lang => ({
         title: lang.title,
         name: lang.id,
-        type: 'string',
+        type: 'text',
         fieldset: lang.isDefault ? undefined : 'translations'
     }))
 })

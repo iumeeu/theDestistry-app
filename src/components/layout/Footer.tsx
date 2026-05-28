@@ -19,11 +19,12 @@ import {
   IconBrandYoutube,
   IconMail,
 } from "@tabler/icons-react";
+import { FaLine } from "react-icons/fa6";
 import { Logo } from "../Logo";
 import { useLanguage } from "@/lib/i18n";
 const socialIcons = [
   {
-    Icon: IconBrandLine,
+    Icon: FaLine,
     label: "Line",
     href: "https://line.me/R/ti/p/@thedentistry",
   },

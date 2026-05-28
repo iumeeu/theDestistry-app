@@ -164,8 +164,8 @@ export function BlogClient({ latestPosts }: { latestPosts: LatestPost[] }) {
             แบ่งเป็นสองหมวดเพื่อให้ค้นหาง่ายขึ้น
           </Text>
         </Stack>
-
-        <Tabs defaultValue="knowledge" color="tan" variant="pills" mt="lg">
+        <PostList items={knowledge} />
+        {/* <Tabs defaultValue="knowledge" color="tan" variant="pills" mt="lg">
           <Tabs.List justify="center" mb="xl">
             <Tabs.Tab value="knowledge">Knowledge Content</Tabs.Tab>
             <Tabs.Tab value="treatments">Our Treatment Services</Tabs.Tab>
@@ -176,7 +176,7 @@ export function BlogClient({ latestPosts }: { latestPosts: LatestPost[] }) {
           <Tabs.Panel value="treatments">
             <PostList items={treatments} />
           </Tabs.Panel>
-        </Tabs>
+        </Tabs> */}
       </Container>
     </Box>
   );

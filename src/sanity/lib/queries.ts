@@ -53,6 +53,10 @@ export type TeamMember = {
     image: string | null;
 };
 
+export type TeamSlug = {
+    slug: string;
+};
+
 export async function getLatestPosts() {
     const post = await fetchSanity<LatestPost[]>(groq`*[_type == "blog.post" && defined(metadata.slug.current)] | order(coalesce(publishDate, _createdAt) desc) {
   "title": coalesce(metadata.title, "Untitled"),
@@ -294,24 +298,30 @@ export async function getServicePosts({
 }
 
 export async function getTeams() {
-    const teams = await fetchSanity<TeamMember[]>(groq`*[_type == "teams"] | order(order asc, coalesce(publishDate, _createdAt) desc) {
-        "id": _id,
-        "nameTh": coalesce(title, metadata.title, "Untitled"),
-        "nameEn": coalesce(titleEn, title, metadata.title, "Untitled"),
-        "nicknameTh": coalesce(nickname, ""),
-        "nicknameEn": coalesce(nicknameEn, nickname, ""),
-        "roleTh": coalesce(role, ""),
-        "roleEn": coalesce(roleEn, role, ""),
-        "educationTh": coalesce(education, []),
-        "educationEn": coalesce(educationEn, education, []),
-        "specialityTh": coalesce(speciality, []),
-        "specialityEn": coalesce(specialityEn, speciality, []),
-        "trainingTh": coalesce(training, ""),
-        "trainingEn": coalesce(trainingEn, training, ""),
-        "branches": coalesce(branch, []),
-        "phone": coalesce(phone, ""),
-        "image": metadata.image.asset->url
+    const teams = await fetchSanity<Sanity.Team[]>(groq`*[_type == "teams"] | order(order asc, coalesce(publishDate, _createdAt) desc) {
+ ...,
+ "image": metadata.image.asset->url
     }`);
 
     return teams;
+}
+
+export async function getTeamBySlug(slug: string) {
+    const team = await fetchSanity<Sanity.Team | null>(
+        groq`*[_type == "teams" && metadata.slug.current == $slug][0] {
+    ...,
+    "image": metadata.image.asset->url
+}`,
+        { params: { slug } }
+    );
+
+    return team;
+}
+
+export async function getTeamSlugs() {
+    const slugs = await fetchSanity<TeamSlug[]>(groq`*[_type == "teams" && defined(metadata.slug.current)] {
+    "slug": metadata.slug.current
+}`);
+
+    return slugs;
 }

@@ -46,7 +46,8 @@ export default defineConfig({
         { id: 'en', title: 'English' }
       ],
       schemaTypes: schema.types.filter((item) => (
-        item.name !== 'translationMessage'
+        item.name !== 'translationMessage',
+        item.name !== 'teams'
       )).map(({ name }) => name),
     }),
   ],

@@ -86,23 +86,42 @@ declare global {
             keywords?: string[];
         };
 
-        type Team = PageBase & {
-            title: string;
-            titleEn?: string;
-            nickname?: string;
-            nicknameEn?: string;
-            role?: string;
-            roleEn?: string;
-            education?: string[];
-            educationEn?: string[];
-            speciality?: string[];
-            specialityEn?: string[];
-            branch?: string[];
-            training?: string;
-            trainingEn?: string;
-            phone?: string;
-            body: PortableTextBlock[];
-            bodyEn?: PortableTextBlock[];
+
+        type LocalizedString = {
+            en: string;
+            th: string;
         };
+
+        type LocalizedMetadata = {
+            title: LocalizedString;
+            description: LocalizedString;
+            image?: Image;
+            ogimage?: string;
+            noIndex: boolean;
+            keywords?: string[];
+            slug: { current: string };
+        };
+        type LocalizedBody = {
+            // _type: "localizedBody";
+            en: PortableTextBlock[];
+            th: PortableTextBlock[];
+        };
+
+
+        type Team = {
+            _id: string;
+            title: LocalizedString;
+            nickname?: LocalizedString;
+            role?: LocalizedString;
+            education?: LocalizedString[];
+            description?: LocalizedString;
+            speciality?: LocalizedString[];
+            branch?: string[];
+            training?: LocalizedString;
+            phone?: string;
+            body: LocalizedBody[];
+            image?: string;
+            metadata?: LocalizedMetadata
+        }
     }
 }
