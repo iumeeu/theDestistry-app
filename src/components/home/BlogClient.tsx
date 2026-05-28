@@ -1,5 +1,6 @@
 "use client";
 
+import { useMemo } from "react";
 import {
   Box,
   Button,
@@ -21,39 +22,13 @@ import type { LatestPost } from "@/sanity/lib/queries";
 const fallbackImage =
   "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=800&q=80";
 
-const treatments = [
-  {
-    title: "Invisalign คืออะไร เหมาะกับใคร?",
-    date: "April 12, 2026",
-    desc: "รู้จักการจัดฟันใส Invisalign ขั้นตอน ราคา และผลลัพธ์ที่คาดหวังได้",
-    img: "https://images.unsplash.com/photo-1606811971618-4486d14f3f99?auto=format&fit=crop&w=800&q=80",
-  },
-  {
-    title: "All-On X ฟันทั้งปากในวันเดียว",
-    date: "April 05, 2026",
-    desc: "เทคนิคการฝังรากเทียม 4-6 ตำแหน่ง คืนรอยยิ้มได้ในวันเดียว",
-    img: "https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=800&q=80",
-  },
-  {
-    title: "Veneer เซรามิก vs คอมโพสิต ต่างกันยังไง",
-    date: "March 30, 2026",
-    desc: "เลือกวีเนียร์แบบไหนให้เหมาะกับคุณและงบประมาณ",
-    img: "https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=800&q=80",
-  },
-  {
-    title: "ขั้นตอนการฟอกสีฟันที่คลินิก",
-    date: "March 18, 2026",
-    desc: "ฟอกสีฟันที่คลินิกต่างจากที่บ้านยังไง ปลอดภัยและเห็นผลแค่ไหน",
-    img: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=800&q=80",
-  },
-];
-
 type BlogCardItem = {
   title: string;
   date: string;
   desc: string;
   img: string | null;
   href?: string;
+  category: string;
 };
 
 function formatDate(date: string) {
@@ -71,7 +46,7 @@ function PostList({ items }: { items: BlogCardItem[] }) {
   if (!items.length) {
     return (
       <Card withBorder={false} p="xl" ta="center">
-        <Text c="dimmed">ยังไม่มีบทความล่าสุดในตอนนี้</Text>
+        <Text c="dimmed">ยังไม่มีบทความในหมวดหมู่นี้</Text>
       </Card>
     );
   }
@@ -93,6 +68,11 @@ function PostList({ items }: { items: BlogCardItem[] }) {
             <Grid.Col span={7}>
               <Stack p="lg" gap="xs" justify="space-between" h="100%">
                 <Stack gap="xs">
+                  {p.category && (
+                    <Text c="tan.6" fw={600} fz="xs" tt="uppercase">
+                      {p.category}
+                    </Text>
+                  )}
                   <Title order={4} c="tan.7" fw={500} fz="h5" lineClamp={2}>
                     {p.title}
                   </Title>
@@ -104,29 +84,17 @@ function PostList({ items }: { items: BlogCardItem[] }) {
                     {p.desc}
                   </Text>
                 </Stack>
-                {p.href ? (
-                  <Button
-                    variant="light"
-                    color="tan"
-                    radius="xl"
-                    size="xs"
-                    w="fit-content"
-                    component={Link}
-                    href={p.href}
-                  >
-                    Learn More
-                  </Button>
-                ) : (
-                  <Button
-                    variant="light"
-                    color="tan"
-                    radius="xl"
-                    size="xs"
-                    w="fit-content"
-                  >
-                    Learn More
-                  </Button>
-                )}
+                <Button
+                  variant="light"
+                  color="tan"
+                  radius="xl"
+                  size="xs"
+                  w="fit-content"
+                  component={p.href ? Link : undefined}
+                  href={p.href || "#"}
+                >
+                  Learn More
+                </Button>
               </Stack>
             </Grid.Col>
           </Grid>
@@ -137,13 +105,34 @@ function PostList({ items }: { items: BlogCardItem[] }) {
 }
 
 export function BlogClient({ latestPosts }: { latestPosts: LatestPost[] }) {
-  const knowledge: BlogCardItem[] = latestPosts.map((post) => ({
-    title: post.title,
-    date: formatDate(post.date),
-    desc: post.desc || "อ่านรายละเอียดเพิ่มเติมได้ในบทความนี้",
-    img: post.img,
-    href: `/blog/${post.slug}`,
-  }));
+  // 💡 1. จัดฟอร์แมตข้อมูลทั้งหมดที่ได้มาจาก Sanity
+  const allPosts = useMemo(() => {
+    return latestPosts.map((post) => ({
+      title: post.title,
+      date: formatDate(post.date),
+      desc: post.desc || "อ่านรายละเอียดเพิ่มเติมได้ในบทความนี้",
+      img: post.img,
+      href: `/blog/${post.slug}`,
+      category: post.category ? post.category[0] : "Knowledge Content", // สมมติว่า category เป็น array ให้เอาแค่ตัวแรกมาใช้ (หรือปรับตามโครงสร้างจริงของคุณ)
+    }));
+  }, [latestPosts]);
+
+  // 💡 2. กำหนดรายชื่อหมวดหมู่ (Category) ที่จะถูกจัดให้อยู่ในฝั่ง "บริการรักษา (Treatments)"
+  // (บทความไหนใน Sanity ที่ใส่ Category ตรงกับกลุ่มนี้ จะถูกดึงไปแสดงที่แท็บ Treatments อัตโนมัติ)
+
+  // 💡 3. ฟิลเตอร์คัดแยกข้อมูลแยกตามเงื่อนไขของ Category หลังบ้าน
+  const treatmentPosts = useMemo(() => {
+    return allPosts.filter((post) =>
+      post.category.includes("Our Treatment Services"),
+    );
+  }, [allPosts]);
+
+  const knowledgePosts = useMemo(() => {
+    // บทความใดๆ ที่ชื่อหมวดหมู่ไม่ได้อยู่ในกลุ่มการรักษา จะถือว่าเป็นความรู้ทั่วไป (Knowledge)
+    return allPosts.filter((post) =>
+      post.category.includes("Knowledge Content"),
+    );
+  }, [allPosts]);
 
   return (
     <Box id="blog" className="section">
@@ -164,19 +153,31 @@ export function BlogClient({ latestPosts }: { latestPosts: LatestPost[] }) {
             แบ่งเป็นสองหมวดเพื่อให้ค้นหาง่ายขึ้น
           </Text>
         </Stack>
-        <PostList items={knowledge} />
-        {/* <Tabs defaultValue="knowledge" color="tan" variant="pills" mt="lg">
+
+        {/* 💡 คงค่า defaultValue แบบ Hard Code เอาไว้ตามโครงสร้างเดิมของคุณ */}
+        <Tabs
+          defaultValue="Knowledge Content"
+          color="tan"
+          variant="pills"
+          mt="lg"
+        >
           <Tabs.List justify="center" mb="xl">
-            <Tabs.Tab value="knowledge">Knowledge Content</Tabs.Tab>
-            <Tabs.Tab value="treatments">Our Treatment Services</Tabs.Tab>
+            <Tabs.Tab value="Knowledge Content">Knowledge Content</Tabs.Tab>
+            <Tabs.Tab value="Our Treatment Services">
+              Our Treatment Services
+            </Tabs.Tab>
           </Tabs.List>
-          <Tabs.Panel value="knowledge">
-            <PostList items={knowledge} />
+
+          {/* 💡 แท็บที่ 1: แสดงเฉพาะชุดข้อมูลที่ผ่านการฟิลเตอร์ว่าเป็นความรู้ทั่วไปจาก Sanity */}
+          <Tabs.Panel value="Knowledge Content">
+            <PostList items={knowledgePosts} />
           </Tabs.Panel>
-          <Tabs.Panel value="treatments">
-            <PostList items={treatments} />
+
+          {/* 💡 แท็บที่ 2: แสดงเฉพาะชุดข้อมูลที่ผ่านการฟิลเตอร์ว่าเป็นหมวดหมู่บริการรักษาจาก Sanity */}
+          <Tabs.Panel value="Our Treatment Services">
+            <PostList items={treatmentPosts} />
           </Tabs.Panel>
-        </Tabs> */}
+        </Tabs>
       </Container>
     </Box>
   );

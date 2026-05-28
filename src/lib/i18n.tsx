@@ -5,9 +5,9 @@ import { createContext, useContext, useEffect, useMemo, useState } from "react";
 export type Lang = "th" | "en";
 
 export const supportedLanguages = [
-    { id: 'th', title: 'Thai', isDefault: true },
-    { id: 'en', title: 'English', },
-]
+  { id: "th", title: "Thai", isDefault: true },
+  { id: "en", title: "English" },
+];
 
 const LOREM =
   "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam";
@@ -137,11 +137,22 @@ Treatment Planning และ AI Smile Simulation เพื่อช่วย
       "สำนักงานใหญ่: 183 อาคารรีเจ้นท์ เฮ้าส์ ชั้นที่ 11 ถนนราชดําริห์ กรุงเทพมหานคร 10330",
     quickLinksTitle: "ลิงก์ด่วน",
     quickLinks: [
-      "เกี่ยวกับเรา",
-      "ทีมทันตแพทย์",
-      "บริการของเรา",
-      "ค้นหาสาขา",
-      "โปรโมชั่น",
+      {
+        title: "บริการและราคา",
+        href: "/service",
+      },
+      {
+        title: "โปรโมชั่น",
+        href: "#",
+      },
+      {
+        title: "ค้นหาสาขา",
+        href: "#",
+      },
+      {
+        title: "ทีมแพทย์ของเรา",
+        href: "/teams",
+      },
     ],
   },
   floating: {
@@ -298,11 +309,22 @@ const en: Translations = {
     address: "Headquarters: - ",
     quickLinksTitle: "Quick Links",
     quickLinks: [
-      "About Us",
-      "Dental Team",
-      "Our Services",
-      "Find a Branch",
-      "Promotions",
+      {
+        title: "Services & Pricing",
+        href: "/service",
+      },
+      {
+        title: "Promotions",
+        href: "#",
+      },
+      {
+        title: "Find a Branch",
+        href: "#",
+      },
+      {
+        title: "Our Dental Team",
+        href: "/teams",
+      },
     ],
   },
   floating: {

@@ -117,9 +117,9 @@ export function Footer() {
                 }}
               >
                 {t.footer.quickLinks.map((l) => (
-                  <List.Item key={l}>
-                    <Anchor href="#" c="darkGrey.6" fz="sm">
-                      {l}
+                  <List.Item key={l.title}>
+                    <Anchor href={l.href} c="darkGrey.6" fz="sm">
+                      {l.title}
                     </Anchor>
                   </List.Item>
                 ))}

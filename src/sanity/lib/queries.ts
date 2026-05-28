@@ -7,6 +7,7 @@ export type LatestPost = {
     date: string;
     desc: string;
     img: string | null;
+    category?: string[];
 };
 
 export type BlogDetail = LatestPost & {
@@ -58,14 +59,19 @@ export type TeamSlug = {
 };
 
 export async function getLatestPosts() {
-    const post = await fetchSanity<LatestPost[]>(groq`*[_type == "blog.post" && defined(metadata.slug.current)] | order(coalesce(publishDate, _createdAt) desc) {
-  "title": coalesce(metadata.title, "Untitled"),
-  "slug": metadata.slug.current,
-  "date": coalesce(publishDate, _createdAt),
-  "desc": coalesce(metadata.description, ""),
-  "img": metadata.image.asset->url
-}[0...4]
-`)
+    const post = await fetchSanity<LatestPost[]>(groq`
+    *[_type == "blog.post" && defined(metadata.slug.current)] | order(coalesce(publishDate, _createdAt) desc) {
+      "title": coalesce(metadata.title, "Untitled"),
+      "slug": metadata.slug.current,
+      "date": coalesce(publishDate, _createdAt),
+      "desc": coalesce(metadata.description, ""),
+      "img": metadata.image.asset->url,
+      
+      // 💡 1. ดึงข้อมูล Category มาจาก Sanity 
+      // (ถ้า category เป็น Reference ให้ใช้ category->title แต่ถ้าเป็น text ธรรมดาให้ใช้ category ได้เลย)
+        "category": categories[]->title 
+    }[0...20] 
+  `); // 💡 ขยายจำนวนจาก 4 เป็น 20 (หรือตามต้องการ) เพื่อให้มีบทความพอสำหรับการทำ Filter
     return post;
 }
 
