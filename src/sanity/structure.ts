@@ -1,3 +1,4 @@
+import { singleton } from '@/sanity/utils'
 import type { StructureResolver } from 'sanity/structure'
 
 // https://www.sanity.io/docs/structure-builder-cheat-sheet
@@ -5,7 +6,7 @@ export const structure: StructureResolver = (S) =>
   S.list()
     .title('CMS Content')
     .items([
-      S.divider(),
+      singleton(S, "site", "Site settings"), S.divider(),
       S.documentTypeListItem("blog.post").title("Blog posts"),
       S.documentTypeListItem("blog.category").title("Blog categories"),
       S.divider(),

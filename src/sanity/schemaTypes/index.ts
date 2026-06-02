@@ -20,6 +20,7 @@ import { localeString } from '@/sanity/schemaTypes/objects/localeStringType'
 import { localeText } from '@/sanity/schemaTypes/objects/localeTextType'
 import localizedBlockContent from '@/sanity/schemaTypes/objects/localizedBlockContent'
 import { localizedMetadataType } from '@/sanity/schemaTypes/objects/localizedMetadata'
+import site from '@/sanity/schemaTypes/documents/site'
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
     horizontalContent,
@@ -41,6 +42,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     tag,
     serviceCategory,
     servicePost,
+    site
 
   ],
 }

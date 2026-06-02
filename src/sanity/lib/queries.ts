@@ -331,3 +331,18 @@ export async function getTeamSlugs() {
 
     return slugs;
 }
+
+
+export async function getSiteSettings() {
+    const site = await fetchSanity<Sanity.Site | null>(groq`*[_type == "site"][0] {
+        ...,
+        "metadata": {
+            ...metadata,
+            "ogimage": metadata.image.asset->url
+        },
+        "heroBanner": heroBanner[].asset->url
+    }`);
+        
+    return site;
+}
+        

@@ -3,6 +3,12 @@ import { PortableTextBlock } from "next-sanity";
 declare global {
     namespace Sanity {
 
+        type Site = {
+            _id: string;
+            metadata: Metadata;
+            heroBanner: Image[]; // URLs of hero banner images
+        }
+
         type PageBase = SanityDocument<{
             title?: string;
             language?: string;

@@ -4,32 +4,39 @@ import { Box, Container, Group, Stack, Text, Title } from "@mantine/core";
 import { useEffect, useState } from "react";
 import { useLanguage } from "@/lib/i18n";
 
-const banners = [
+const defaultBanners = [
   "/images/Interior/Lobby/TheDentistry_Lobby_FrontView_Reception.png",
   "/images/Interior/OPD/TheDentistry_OPD_Wide_PristineWhite.png",
   "/images/Interior/Exterior/hero.jpg",
   // "/images/Interior/Lobby/TheDentistry_Lobby_WashStation_Centered.png",
 ];
 
-export function Hero() {
+type HeroProps = {
+  banners?: string[];
+};
+
+export function Hero({ banners }: HeroProps) {
   const [active, setActive] = useState(0);
   const { t } = useLanguage();
+  const heroBanners = banners?.filter(Boolean)?.length
+    ? (banners.filter(Boolean) as string[])
+    : defaultBanners;
 
   useEffect(() => {
     const id = setInterval(
-      () => setActive((i) => (i + 1) % banners.length),
+      () => setActive((i) => (i + 1) % heroBanners.length),
       5000,
     );
     return () => clearInterval(id);
-  }, []);
+  }, [heroBanners.length]);
 
   return (
     <Box id="home" style={{ position: "relative", overflow: "hidden" }}>
       {/* Background carousel */}
       <Box style={{ position: "absolute", inset: 0 }}>
-        {banners.map((src, i) => (
+        {heroBanners.map((src, i) => (
           <Box
-            key={src}
+            key={`${src}-${i}`}
             style={{
               position: "absolute",
               inset: 0,
@@ -82,7 +89,7 @@ export function Hero() {
         justify="center"
         style={{ position: "absolute", left: 0, right: 0, bottom: 24 }}
       >
-        {banners.map((_, i) => (
+        {heroBanners.map((_, i) => (
           <Box
             key={i}
             onClick={() => setActive(i)}
